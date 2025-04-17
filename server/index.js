@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectdb = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes");
 
 dotenv.config();
 connectdb();
@@ -14,6 +16,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("JeevanAlert - Ai is running");
 });
+
+// authentication route
+app.use("/user", authRoutes);
+// user route
+app.use("/user", userRouter);
 
 // port
 const port = process.env.PORT || 5000;
